@@ -1,0 +1,62 @@
+body {
+  font: 20px/2 Palatino, serif;
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+main {
+  width: 60%;
+  height: auto;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+p {
+  margin: 0 0 10px 0;
+}
+.champoint {
+  white-space: nowrap;
+}
+input {
+  display: inline;
+  border-radius: 5px;
+  border: 2px solid grey;
+  padding: 7px;
+  font: 17px "Courier New";
+}
+ul {
+  font: 25px "Courier New";
+  display: none;
+}
+li {
+  margin: 10px 5%;
+}
+footer {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  width: 100%;
+  background: lightgrey;
+  text-align: center;
+}
+.orange {
+  width: 100%;
+  padding: 0;
+  border-radius: 0;
+  border: none;
+  caret-color: transparent;
+  letter-spacing: 3px;
+}
+div.fleche {
+  cursor: pointer;
+  border: solid black;
+  border-width: 0 3px 3px 0;
+  display: none;
+  padding: 5px;
+  margin-left: 15px;
+  transform: rotate(45deg);
+}
