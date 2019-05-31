@@ -12,8 +12,8 @@
 const Q = [
   { titre: 'le mouvement' },
 
-  { intit: 'Un changement de position est un ',
-    choix: ['déplacement', 'mouvement', 'retournement'],
+  { intit: 'Un changement de position est ',
+    choix: ['un déplacement', 'un mouvement', 'un retournement', 'une direction'],
     correct: 'déplacement' },
 
   { intit: 'La ligne suivie par le point central d’un objet en mouvement s’appelle ',
@@ -119,7 +119,6 @@ const FLECHE = document.querySelector('.fleche');
 const QUESTION = document.querySelector('.question');
 const CHAMP = document.querySelector('input');
 const LISTE = document.querySelector('ul');
-const CHOIX = document.querySelectorAll('li');
 const CONSIGNE = document.querySelector('.consigne');
 let tailleChamp;
 let num;
@@ -243,6 +242,14 @@ function redirection() {
   }
 }
 
+function melange(liste) {
+  for (let i = liste.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [liste[i], liste[j]] = [liste[j], liste[i]];
+  }
+  return liste;
+}
+
 function suivant() {
   if (num === 1) {
     QUESTION.style.fontSize = '20px';
@@ -269,11 +276,16 @@ function suivant() {
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
   QUESTION.innerHTML = Q[num].intit;
-  // permettre l’entrée de choix supplémentaires
-  // https://bost.ocks.org/mike/shuffle/
-  CHOIX[0].innerHTML = Q[num].choix[0];
-  CHOIX[1].innerHTML = Q[num].choix[1];
-  CHOIX[2].innerHTML = Q[num].choix[2];
+  while (LISTE.firstChild) {
+    LISTE.removeChild(LISTE.firstChild);
+  }
+  const choixMelanges = melange(Q[num].choix);
+  for (let i = 0; i < Q[num].choix.length; i++) {
+    const CHOIX_SUPPL = document.createElement('li');
+    const CHOIX = document.createTextNode(choixMelanges[i]);
+    CHOIX_SUPPL.appendChild(CHOIX);
+    LISTE.appendChild(CHOIX_SUPPL);
+  }
 }
 
 function faux() {
