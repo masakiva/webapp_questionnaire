@@ -30,6 +30,9 @@ function initialisation() {
 initialisation();
 
 function affichageResultats() {
+  if (points === 11) {
+    points = 10.5;
+  }
   MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + points * 2 + '</sup>&frasl;<sub>20</sub></span>';
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
@@ -61,73 +64,6 @@ function fin() {
   };
 }
 
-function redirection() {
-  if ( num !== 5
-    && num !== 8
-    && num !== 10
-    && num !== 12
-    && num !== 14
-    && num !== 16
-    && num !== 19
-    && num !== 20
-    || num === 8 && bloc === 2
-    || num === 10 && bloc === 3
-    || num === 19 && bloc === 7) {
-    num++;
-  } else if (num === 5) {
-    switch (points) {
-      case 3:
-      case 4:
-        num = 8;
-	bloc = 2;
-	console.log('saut —> question 8');
-	break;
-      case 5:
-        num = 10;
-	bloc = 3;
-	console.log('saut —> question 10');
-	break;
-      default:
-        num++;
-	bloc = 1;
-	break;
-    }
-  } else if (num === 8 && bloc === 1
-          || num === 10 && bloc === 2
-	  || num === 12 && bloc === 3) {
-    switch (points) {
-      case 4:
-      case 5:
-      case 6:
-      	num = 15;
-      	bloc = 5;
-      	console.log('saut —> question 15');
-      	break;
-      case 7:
-        num = 17;
-	bloc = 6;
-	console.log('saut —> question 17');
-	break;
-      case 8:
-        num = 18;
-	bloc = 7;
-	console.log('saut —> question 18');
-	break;
-      default:
-        num = 13;
-	bloc = 4;
-      	console.log('saut —> question 13');
-	break;
-    }
-  } else if (num === 14
-          || num === 16
-	  || num === 19 && bloc === 6
-	  || num === 20) {
-    num = 50;
-    fin();
-  }
-}
-
 function melange(liste) {
   for (let i = liste.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -144,7 +80,7 @@ function suivant() {
     LISTE.style.display = 'block';
     CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te tromper</em> puis valide-la par</span> la touche <span style="font-variant: small-caps;">Entrée.'
   }
-  if (num === 50) {
+  if (num >= Q.length) {
     return;
   }
   avanc++;
