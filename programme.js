@@ -9,7 +9,6 @@ const CONSIGNE = document.querySelector('.consigne');
 let tailleChamp;
 let num;
 let avanc;
-let points;
 let bloc;
 let resultats = '';
 
@@ -30,9 +29,6 @@ function initialisation() {
 initialisation();
 
 function affichageResultats() {
-  if (points === 11) {
-    points = 10.5;
-  }
   MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + noteFinale + '</sup>&frasl;<sub>20</sub></span>';
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
