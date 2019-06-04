@@ -10,6 +10,7 @@ let tailleChamp;
 let num;
 let avanc;
 let bloc;
+let points;
 let resultats = '';
 
 
@@ -29,7 +30,7 @@ function initialisation() {
 initialisation();
 
 function affichageResultats() {
-  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + noteFinale + '</sup>&frasl;<sub>20</sub></span>';
+  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + points * coeff + '</sup>&frasl;<sub>20</sub></span>';
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
   MESSAGE_FIN.style.textAlign = 'center';
