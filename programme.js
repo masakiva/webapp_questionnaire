@@ -33,7 +33,7 @@ function affichageResultats() {
   if (points === 11) {
     points = 10.5;
   }
-  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + points * 2 + '</sup>&frasl;<sub>20</sub></span>';
+  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + noteFinale + '</sup>&frasl;<sub>20</sub></span>';
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
   MESSAGE_FIN.style.textAlign = 'center';
@@ -78,7 +78,7 @@ function suivant() {
     QUESTION.style.fontWeight = 'initial';
     CHAMP.style.fontSize = '17px';
     LISTE.style.display = 'block';
-    CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te tromper</em> puis valide-la par</span> la touche <span style="font-variant: small-caps;">Entrée.'
+    CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te tromper</em> puis valide-la par</span> la touche <span style="font-variant: small-caps;">Entrée.';
   }
   if (num >= Q.length) {
     return;
