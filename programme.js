@@ -24,13 +24,16 @@ function initialisation() {
   QUESTION.style.fontWeight = '600';
   CHAMP.style.fontSize = '32px';
   CHAMP.setAttribute('size', Q[0].titre.length);
-  CONSIGNE.innerHTML = 'Saisis dans le champ le titre du questionnaire noté au tableau et valide par la touche <span style="font-variant: small-caps;">Entrée</span>.';
+  CONSIGNE.innerHTML = 'Saisis dans le champ le titre du questionnaire noté ' +
+    'au tableau et valide par la touche <span style="font-variant: small-' +
+    'caps;">Entrée</span>.';
 }
 
 initialisation();
 
 function affichageResultats() {
-  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;"><sup>' + points * coeff + '</sup>&frasl;<sub>20</sub></span>';
+  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;">' +
+    '<sup>' + points * COEFF + '</sup>&frasl;<sub>20</sub></span>';
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
   MESSAGE_FIN.style.textAlign = 'center';
@@ -48,7 +51,8 @@ function details() {
 function fin() {
   avanc++;
   BODY.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, 60%)';
-  MESSAGE_FIN.innerHTML = 'C’est terminé, restez sur cette page et attendez le passage du professeur.';
+  MESSAGE_FIN.innerHTML = 'C’est terminé, restez sur cette page et attendez ' +
+    'le passage du professeur.';
   MESSAGE_FIN.style.fontSize = '35px';
   LISTE.style.display = 'none';
   CONSIGNE.style.display = 'none';
@@ -61,13 +65,14 @@ function fin() {
   };
 }
 
-function melange(liste) {
-  for (let i = liste.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [liste[i], liste[j]] = [liste[j], liste[i]];
+function melange(liste, min, max) {
+  for (let i = max; i > min; i--) {
+    const J = Math.floor(Math.random() * (max - min + 1)) + min;
+    [liste[i], liste[J]] = [liste[J], liste[i]];
   }
   return liste;
 }
+melange(Q, MELANGE[0], MELANGE[1]);
 
 function suivant() {
   if (num === 1) {
@@ -75,7 +80,9 @@ function suivant() {
     QUESTION.style.fontWeight = 'initial';
     CHAMP.style.fontSize = '17px';
     LISTE.style.display = 'block';
-    CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te tromper</em> puis valide-la par</span> la touche <span style="font-variant: small-caps;">Entrée.';
+    CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te ' +
+      'tromper</em> puis valide-la par</span> la touche <span style="font-' +
+      'variant: small-caps;">Entrée.';
   }
   if (num >= Q.length) {
     return;
@@ -98,10 +105,10 @@ function suivant() {
   while (LISTE.firstChild) {
     LISTE.removeChild(LISTE.firstChild);
   }
-  const choixMelanges = melange(Q[num].choix);
+  const CHOIX_MELANGES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
   for (let i = 0; i < Q[num].choix.length; i++) {
     const CHOIX_SUPPL = document.createElement('li');
-    const CHOIX = document.createTextNode(choixMelanges[i]);
+    const CHOIX = document.createTextNode(CHOIX_MELANGES[i]);
     CHOIX_SUPPL.appendChild(CHOIX);
     LISTE.appendChild(CHOIX_SUPPL);
   }
@@ -129,10 +136,19 @@ function verifierChoix() {
 	  } else {
 	    console.log('réponse ' + num + ' correcte : ' + points + ' points');
 	  }
-          resultats += '<span style="color: darkgreen">[' + num + ']</span><br>';
+          resultats += '<span style="color: darkgreen;">[' + num +
+	    ']</span><br>';
 	} else {
+	  if (num >= MELANGE[0] && num <= MELANGE[1]) {
+	  console.log('réponse ' + num + ' : « ' + CHAMP.value +
+	    ' » (question : ' + Q[num].intit.slice(0, 30) + '…)');
+	  resultats += '<span style="color: crimson;">[' + num + '] <em>' +
+	    CHAMP.value + '</em></span> (' + Q[num].intit + '…)<br>';
+	  } else { 
 	  console.log('réponse ' + num + ' : « ' + CHAMP.value + ' »')
-	    resultats += '<span style="color: crimson">[' + num + '] <em>' + CHAMP.value + '</em></span><br>';
+	  resultats += '<span style="color: crimson;">[' + num +
+	    '] <em>' + CHAMP.value + '</em></span><br>';
+	  }
 	}
 	redirection();
 	suivant();

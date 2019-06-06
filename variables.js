@@ -187,5 +187,11 @@ function redirection() {
 // ————
 // NOTE
 // ————
-let coeff = 2; // coefficient à appliquer à une réponse juste pour le calcul …
-               // … de la note finale
+const COEFF = 2; // coefficient à appliquer à une réponse juste pour le calcul …
+		 // … de la note finale
+
+// ————————————————————————————————————————————————————————————————
+// APPARITION D’UNE FOURCHETTE DE QUESTIONS DANS UN ORDRE ALÉATOIRE
+// ————————————————————————————————————————————————————————————————
+const MELANGE = [1, 5]; // les numéros correspondent aux limites inférieure …
+                        // … et supérieure de la fourchette (incluses)
