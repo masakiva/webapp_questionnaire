@@ -1,11 +1,16 @@
 const BODY = document.body;
 const MAIN = document.querySelector('main');
-const MESSAGE_FIN = document.querySelector('.message-fin');
 const FLECHE = document.querySelector('.fleche');
 const QUESTION = document.querySelector('.question');
+const Q_DEBUT = document.querySelector('.q-debut');
 const CHAMP = document.querySelector('input');
+const Q_FIN = document.querySelector('.q-fin');
+const CHAMPOINT = document.querySelector('.champoint');
 const LISTE = document.querySelector('ul');
 const CONSIGNE = document.querySelector('.consigne');
+const CONSIGNE_DEBUT = document.querySelector('.consigne-debut');
+const CONSIGNE_FIN = document.querySelector('.consigne-fin');
+
 let tailleChamp;
 let num;
 let avanc;
@@ -19,26 +24,38 @@ function initialisation() {
   avanc = 0;
   points = 0;
   CHAMP.focus();
-  QUESTION.innerHTML = 'Ceci est un questionnaire sur ';
+  Q_DEBUT.textContent = 'Ceci est un questionnaire sur ';
+  Q_FIN.textContent = '.';
   QUESTION.style.fontSize = '35px';
   QUESTION.style.fontWeight = '600';
   CHAMP.style.fontSize = '32px';
   CHAMP.setAttribute('size', Q[0].titre.length);
-  CONSIGNE.innerHTML = 'Saisis dans le champ le titre du questionnaire noté ' +
-    'au tableau et valide par la touche <span style="font-variant: small-' +
-    'caps;">Entrée</span>.';
+  CONSIGNE_DEBUT.textContent = 'Saisis dans le champ le titre du ' +
+    'questionnaire noté au tableau et valide par la touche'
+  CONSIGNE_FIN.textContent = 'Entrée.';
+  CONSIGNE_FIN.style.fontVariant = 'small-caps';
 }
 
 initialisation();
 
 function affichageResultats() {
-  MESSAGE_FIN.innerHTML = 'Note obtenue : <span style="font-size: 42px;">' +
-    '<sup>' + points * COEFF + '</sup>&frasl;<sub>20</sub></span>';
+  Q_DEBUT.textContent = 'Note obtenue : ';
+  Q_FIN.style.display = 'inline';
+  Q_FIN.style.fontSize = '42px';
+  const SUP = document.createElement('sup');
+  const FRASL = document.createTextNode ('\u2044');
+  const SUB = document.createElement('sub');
+  SUP.textContent = points * COEFF;
+  SUB.textContent = '20';
+  Q_FIN.textContent = '';
+  Q_FIN.appendChild(SUP);
+  Q_FIN.appendChild(FRASL);
+  Q_FIN.appendChild(SUB);
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
-  MESSAGE_FIN.style.textAlign = 'center';
+  QUESTION.style.textAlign = 'center';
   FLECHE.style.display = 'inline-block'; 
-  MESSAGE_FIN.style.display = 'inline-block'; 
+  QUESTION.style.display = 'inline-block'; 
 }
 
 function details() {
@@ -51,9 +68,11 @@ function details() {
 function fin() {
   avanc++;
   BODY.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, 60%)';
-  MESSAGE_FIN.innerHTML = 'C’est terminé, restez sur cette page et attendez ' +
+  Q_DEBUT.textContent = 'C’est terminé, restez sur cette page et attendez ' +
     'le passage du professeur.';
-  MESSAGE_FIN.style.fontSize = '35px';
+  CHAMP.style.display = 'none';
+  Q_FIN.style.display = 'none';
+  QUESTION.style.fontSize = '35px';
   LISTE.style.display = 'none';
   CONSIGNE.style.display = 'none';
   const CHAMP_MDP = document.createElement('input');
@@ -80,9 +99,8 @@ function suivant() {
     QUESTION.style.fontWeight = 'initial';
     CHAMP.style.fontSize = '17px';
     LISTE.style.display = 'block';
-    CONSIGNE.innerHTML = 'Recopie la bonne réponse dans le champ <em>sans te ' +
-      'tromper</em> puis valide-la par</span> la touche <span style="font-' +
-      'variant: small-caps;">Entrée.';
+    CONSIGNE_DEBUT.textContent = 'Recopie la bonne réponse dans le champ ' +
+      'sans te tromper et valide-la par la touche ';
   }
   if (num >= Q.length) {
     return;
@@ -101,7 +119,14 @@ function suivant() {
   CHAMP.value = '';
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
-  QUESTION.innerHTML = Q[num].intit;
+  const Q_INTIT = Q[num].intit.split('(CHAMP)');
+  Q_DEBUT.textContent = Q_INTIT[0];
+  Q_FIN.textContent = Q_INTIT[1];
+  if (Q_FIN.textContent === ".") {
+    CHAMPOINT.style.whiteSpace = 'nowrap';
+  } else {
+    CHAMPOINT.style.whiteSpace = 'initial';
+  }
   while (LISTE.firstChild) {
     LISTE.removeChild(LISTE.firstChild);
   }

@@ -12,83 +12,84 @@
 const Q = [
   { titre: 'le mouvement' },
 // num = 1
-  { intit: 'Un changement de position est ',
+  { intit: 'Un changement de position est (CHAMP).',
     choix: ['un déplacement', 'un mouvement', 'un retournement', 'une direction'],
     correct: 'un déplacement' },
 // num = 2
-  { intit: 'La ligne suivie par le point central d’un objet en mouvement s’appelle ',
+  { intit: 'La ligne suivie par le point central d’un objet en mouvement s’appelle (CHAMP).',
     choix: ['trajectoire', 'vitesse', 'déplacement'],
     correct: 'trajectoire' },
 // num = 3
-  { intit: 'Un objet qui tourne autour d’un axe est en ',
+  { intit: 'Un objet qui tourne autour d’un axe est en (CHAMP).',
     choix: ['rotation', 'équilibre', 'translation'],
     correct: 'rotation' },
 // num = 4
-  { intit: 'Un objet qui se déplace en ligne droite sans tourner est en ',
+  //
+  { intit: 'Un objet qui se déplace en ligne droite sans tourner est en (CHAMP).',
     choix: ['rotation circulaire', 'translation rectiligne', 'accélération'],
     correct: 'translation rectiligne' },
 // num = 5
-  { intit: 'La durée d’un mouvement peut se mesurer en ',
+  { intit: 'La durée d’un mouvement peut se mesurer en (CHAMP).',
     choix: ['mètre', 'kilomètre', 'seconde'],
     correct: 'seconde' },
 // num = 6
-  { intit: 'Un mouvement qui va de plus en plus vite est un mouvement ',
+  { intit: 'Un mouvement qui va de plus en plus vite est un mouvement (CHAMP).',
     choix: ['rapide', 'accéléré', 'moins lent'],
     correct: 'accéléré' },
 // num = 7
-  { intit: 'La vitesse d’un objet correspond à la longueur qu’il parcourt dans une unité de ',
+  { intit: 'La vitesse d’un objet correspond à la longueur qu’il parcourt dans une unité de (CHAMP).',
     choix: ['masse', 'temps', 'longueur'],
     correct: 'temps' },
 // num = 8
-  { intit: 'Le lieu précis où se trouve un objet dans l’espace est sa ',
+  { intit: 'Le lieu précis où se trouve un objet dans l’espace est sa (CHAMP).',
     choix: ['position', 'trajectoire', 'précision'],
     correct: 'position' },
 // num = 9
-  { intit: 'Si je marche d’un pas de plus en plus rapide, je peux augmenter ma ',
+  { intit: 'Si je marche d’un pas de plus en plus rapide, je peux augmenter ma (CHAMP).',
     choix: ['translation', 'trajectoire', 'vitesse'],
     correct: 'vitesse' },
 // num = 10
-  { intit: 'À la vitesse de 5 m/s, je parcours en 1 min ',
+  { intit: 'À la vitesse de 5 m/s, je parcours en 1 min (CHAMP).',
     choix: ['50 m', '30 m', '300 m'],
     correct: '300 m' },
 // num = 11
-  { intit: 'J’ai parcouru 3 km en 20 min. Ma vitesse moyenne était de ',
+  { intit: 'J’ai parcouru 3 km en 20 min. Ma vitesse moyenne était de (CHAMP).',
     choix: ['1 km/h', '1 m/s', '9 km/h'],
     correct: '9 km/h' },
 // num = 12
-  { intit: 'Ma gomme est tombée de ma poche. Elle n’a rencontré aucun obstacle au milieu de la cage d’escalier. Son mouvement était ',
+  { intit: 'Ma gomme est tombée de ma poche. Elle n’a rencontré aucun obstacle au milieu de la cage d’escalier. Son mouvement était (CHAMP).',
     choix: ['décéléré', 'accéléré', 'à vitesse constante'],
     correct: 'accéléré' },
 // num = 13
-  { intit: 'La vitesse peut se mesurer en ',
+  { intit: 'La vitesse peut se mesurer en (CHAMP).',
     choix: ['g/L', 'km', 'km/h'],
     correct: 'km/h' },
 // num = 14
-  { intit: 'Une hirondelle qui tournoie dans l’air en chassant les insectes a, par rapport à moi qui la regarde, un mouvement ',
+  { intit: 'Une hirondelle qui tournoie dans l’air en chassant les insectes a, par rapport à moi qui la regarde, un mouvement (CHAMP).',
     choix: ['de rotation', 'quelconque', 'de translation'],
     correct: 'quelconque' },
 // num = 15
-  { intit: 'Le train qui va s’arrêter en gare a, par rapport au quai, un mouvement de ',
+  { intit: 'Le train qui va s’arrêter en gare a, par rapport au quai, un mouvement de (CHAMP).',
     choix: ['translation rectiligne accélérée', 'translation rectiligne décélérée', 'rotation constante'],
     correct: 'translation rectiligne décélérée' },
 // num = 16
-  { intit: '… et la roue de ce même train a, toujours par rapport au quai, un mouvement ',
+  { intit: '… et la roue de ce même train a, toujours par rapport au quai, un mouvement (CHAMP).',
     choix: ['de rotation', 'quelconque', 'de translation et de rotation'],
     correct: 'de translation et de rotation' },
 // num = 17
-  { intit: 'Pour déboucher ma bouteille d’eau, je dévisse son bouchon. Celui-ci a, par rapport à la bouteille, un mouvement de ',
+  { intit: 'Pour déboucher ma bouteille d’eau, je dévisse son bouchon. Celui-ci a, par rapport à la bouteille, un mouvement de (CHAMP).',
     choix: ['rotation', 'translation', 'rotation + translation'],
     correct: 'rotation + translation' },
 // num = 18
-  { intit: 'Si je double ma vitesse moyenne pour aller de Paris à Bordeaux, la longueur de mon déplacement est ',
+  { intit: 'Si je double ma vitesse moyenne pour aller de Paris à Bordeaux, la longueur de mon déplacement est (CHAMP).',
     choix: ['divisée par deux', 'multipliée par deux', 'inchangée'],
     correct: 'inchangée' },
 // num = 19
-  { intit: 'En même temps que j’ouvre la porte, j’en relève la poignée. La trajectoire de l’extrémité de cette poignée est ',
+  { intit: 'En même temps que j’ouvre la porte, j’en relève la poignée. La trajectoire de l’extrémité de cette poignée est (CHAMP).',
     choix: ['un cercle', 'une ligne droite', 'une ligne quelconque'],
     correct: 'une ligne quelconque' },
 // num = 20
-  { intit: 'Le bus 39 dans lequel je me trouve roule en ligne droite vers la station Pasteur, à la vitesse de 39 km/h. Une ambulance de l’hôpital Necker le dépasse. Sa vitesse par rapport au bus vaut 21 km/h.<br>La vitesse à laquelle roule l’ambulance vaut ',
+  { intit: 'Le bus 39 dans lequel je me trouve roule en ligne droite vers la station Pasteur, à la vitesse de 39 km/h. Une ambulance de l’hôpital Necker le dépasse. Sa vitesse par rapport au bus vaut 21 km/h.<br>La vitesse à laquelle roule l’ambulance vaut (CHAMP).',
     choix: ['18 km/h', '60 km/h', '78 km/h'],
     correct: '18 km/h' }
 ];

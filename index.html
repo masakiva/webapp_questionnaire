@@ -10,25 +10,23 @@
   </head>
   <body>
     <main>
-      <p class="message-fin">
-	<span class="question">
-	  Le code JavaScript n’a pas pu être chargé. Causes possibles :<br>
-	  &emsp;— une erreur est présente dans le code (une alerte couleur rouge
-	    devrait s’afficher dans la console JS du navigateur)<br>
-	  &emsp;— JavaScript n’est pas activé dans le navigateur<br>
-	  &emsp;— les fichiers q.html et q.js sont dans des répertoires
-	    différents<br><br>
-	</span><span class="champoint"><input type="text">&#8239;.</span>
-        <div class="fleche" onclick="details()"></div>
+      <p class="question">
+	<span class="q-debut"></span>
+	<span class="champoint">
+	  <input type="text">
+	  <span class="q-fin"></span>
+	</span>
       </p>
+      <div class="fleche" onclick="details()"></div>
       <ul>
-	<li>Le code CSS n’a pas pu être chargé.</li>
-	<li>cause possible :</li>
-	<li>les fichiers q.html et q.css sont dans des répertoires
-	  différents</li>
       </ul>
+      <noscript>
+	JavaScript est-il activé dans le navigateur?
+      </noscript>
     </main>
     <footer class="consigne">
+      <span class="consigne-debut"></span>
+      <span class="consigne-fin"></span>
     </footer>
   </body>
 </html> 
