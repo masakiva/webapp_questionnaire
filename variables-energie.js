@@ -88,7 +88,7 @@ const Q = [
     correct: "Le réchauffement climatique et la pollution des grandes villes" },
 // num = 20
   { intit: "En France, l'électricité est produite en majorité par (CHAMP).",
-    choix: ["des centrales nucléaires", "des éoliennes", "des centrales hydroélectriques"; "des centrales à charbon"],
+    choix: ["des centrales nucléaires", "des éoliennes", "des centrales hydroélectriques", "des centrales à charbon"],
     correct: "des centrales nucléaires" }
 ];
 
