@@ -96,7 +96,7 @@ melange(Q, MELANGE[0], MELANGE[1]);
 function suivant() {
   if (num === 1) {
     QUESTION.style.fontSize = '20px';
-    QUESTION.style.fontWeight = 'initial';
+    QUESTION.style.fontWeight = 'unset';
     CHAMP.style.fontSize = '17px';
     LISTE.style.display = 'block';
     CONSIGNE_DEBUT.textContent = 'Recopie la bonne réponse dans le champ ' +
@@ -125,7 +125,7 @@ function suivant() {
   if (Q_FIN.textContent === ".") {
     CHAMPOINT.style.whiteSpace = 'nowrap';
   } else {
-    CHAMPOINT.style.whiteSpace = 'initial';
+    CHAMPOINT.style.whiteSpace = 'unset';
   }
   while (LISTE.firstChild) {
     LISTE.removeChild(LISTE.firstChild);
