@@ -11,7 +11,7 @@ const CONSIGNE = document.querySelector('.consigne');
 const CONSIGNE_DEBUT = document.querySelector('.consigne-debut');
 const CONSIGNE_FIN = document.querySelector('.consigne-fin');
 
-let tailleChamp;
+let tailleChamp = 0;
 let num;
 let avanc;
 let bloc;
@@ -38,7 +38,7 @@ function initialisation() {
 
 initialisation();
 
-function affichageResultats() {
+function afficheResultats() {
   Q_DEBUT.textContent = 'Note obtenue : ';
   Q_FIN.style.display = 'inline';
   Q_FIN.style.fontSize = '42px';
@@ -80,7 +80,7 @@ function fin() {
   CHAMP_MDP.setAttribute('class', 'orange');
   CHAMP_MDP.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, 50%)';
   CHAMP_MDP.onkeydown = function(e) {
-    if (e.keyCode === 13 && CHAMP_MDP.value === MDP) { affichageResultats(); }
+    if (e.keyCode === 13 && CHAMP_MDP.value === MDP) { afficheResultats(); }
   };
 }
 
@@ -109,13 +109,6 @@ function suivant() {
   let lumbleu = 100 - avanc * 2;
   BODY.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, ' + lumbleu + '%)';
   document.title = 'Question ' + avanc;
-  tailleChamp = 0;
-  for (let i = 0; i < Q[num].choix.length; i++) {
-    if (Q[num].choix[i].length > tailleChamp) {
-      tailleChamp = Q[num].choix[i].length;
-    }
-  }
-  CHAMP.setAttribute('size', tailleChamp);
   CHAMP.value = '';
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
@@ -130,60 +123,83 @@ function suivant() {
   while (LISTE.firstChild) {
     LISTE.removeChild(LISTE.firstChild);
   }
-  const CHOIX_MELANGES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
-  for (let i = 0; i < Q[num].choix.length; i++) {
-    const CHOIX_SUPPL = document.createElement('li');
-    const CHOIX = document.createTextNode(CHOIX_MELANGES[i]);
-    CHOIX_SUPPL.appendChild(CHOIX);
-    LISTE.appendChild(CHOIX_SUPPL);
+  if (Q[num].hasOwnProperty('choix')) {
+    for (let i = 0; i < Q[num].choix.length; i++) {
+      if (Q[num].choix[i].length > tailleChamp) {
+	tailleChamp = Q[num].choix[i].length;
+      }
+    }
+    CHAMP.setAttribute('size', tailleChamp);
+    CHAMP.style.width = 'unset';
+    LISTE.style.display = 'block';
+    const CHOIX_MELANGES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
+    for (let i = 0; i < Q[num].choix.length; i++) {
+      const CHOIX_SUPPL = document.createElement('li');
+      const CHOIX = document.createTextNode(CHOIX_MELANGES[i]);
+      CHOIX_SUPPL.appendChild(CHOIX);
+      LISTE.appendChild(CHOIX_SUPPL);
+    }
+  } else {
+    LISTE.style.display = 'none';
+    CHAMP.style.width = '100%';
   }
 }
 
-function faux() {
+function verifieReponse() {
+  if (CHAMP.value === Q[num].correct) {
+    points++;
+    if (points === 1) {
+      console.log('réponse ' + num + ' correcte : ' + points + ' point');
+    } else {
+      console.log('réponse ' + num + ' correcte : ' + points + ' points');
+    }
+    resultats += '<span style="color: darkgreen;">[' + num + ']</span><br>';
+  } else {
+    if (num >= MELANGE[0] && num <= MELANGE[1]) {
+    console.log('réponse ' + num + ' : « ' + CHAMP.value +
+      ' » (question : ' + Q[num].intit.slice(0, 30) + '…)');
+    resultats += '<span style="color: crimson;">[' + num + '] <em>' +
+      CHAMP.value + '</em></span> (' + Q[num].intit + '…)<br>';
+    } else { 
+    console.log('réponse ' + num + ' : « ' + CHAMP.value + ' »')
+    resultats += '<span style="color: crimson;">[' + num +
+      '] <em>' + CHAMP.value + '</em></span><br>';
+    }
+  }
+  redirection();
+  suivant();
+}
+
+function reponseInvalide() {
   CHAMP.style.backgroundColor = 'crimson';
 }
 
-function verifierChoix() {
+function traiteReponse() {
   if (num === 0) {
     if (CHAMP.value === Q[0].titre) {
       num++;
       suivant(num);
     } else {
-      faux();
+      reponseInvalide();
     }
   } else {
-    for (let i = 0; i < Q[num].choix.length; i++) {
-      if (CHAMP.value === Q[num].choix[i]) {
-	if (CHAMP.value === Q[num].correct) {
-	  points++;
-	  if (points === 1) {
-	    console.log('réponse ' + num + ' correcte : ' + points + ' point');
-	  } else {
-	    console.log('réponse ' + num + ' correcte : ' + points + ' points');
-	  }
-          resultats += '<span style="color: darkgreen;">[' + num +
-	    ']</span><br>';
-	} else {
-	  if (num >= MELANGE[0] && num <= MELANGE[1]) {
-	  console.log('réponse ' + num + ' : « ' + CHAMP.value +
-	    ' » (question : ' + Q[num].intit.slice(0, 30) + '…)');
-	  resultats += '<span style="color: crimson;">[' + num + '] <em>' +
-	    CHAMP.value + '</em></span> (' + Q[num].intit + '…)<br>';
-	  } else { 
-	  console.log('réponse ' + num + ' : « ' + CHAMP.value + ' »')
-	  resultats += '<span style="color: crimson;">[' + num +
-	    '] <em>' + CHAMP.value + '</em></span><br>';
-	  }
+    if (Q[num].hasOwnProperty('choix')) {
+      for (let i = 0; i < Q[num].choix.length; i++) {
+	if (CHAMP.value === Q[num].choix[i]) {
+	  verifieReponse();
+	  return;
+	} else if (i === Q[num].choix.length - 1) {
+	  reponseInvalide();
+	  return;
 	}
-	redirection();
-	suivant();
-	return;
       }
+    } else {
+      verifieReponse();
+      return;
     }
-    faux();
   }
 }
 
 CHAMP.onkeydown = function(e) {
-  if (e.keyCode === 13) { verifierChoix(); }
+  if (e.keyCode === 13) { traiteReponse(); }
 };
