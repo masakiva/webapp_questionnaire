@@ -10,94 +10,92 @@
 // TITRE ET QUESTIONS
 // ——————————————————
 const Q = [
-  { titre: 'le mouvement' },
+  { titre: "l'énergie" },
 // num = 1
-  { intit: 'Un changement de position est (CHAMP).',
-    choix: ['un déplacement', 'un mouvement', 'un retournement', 'une direction'],
-    correct: 'un déplacement' },
+  { intit: "En physique, l'(CHAMP) s'appelle aussi 'chaleur'.",
+    correct: "énergie thermique" },
 // num = 2
-  { intit: 'La ligne suivie par le point central d’un objet en mouvement s’appelle (CHAMP).',
-    choix: ['trajectoire', 'vitesse', 'déplacement'],
-    correct: 'trajectoire' },
+  { intit: "L'énergie chimique est le produit d'une (CHAMP).",
+    choix: ["réaction chimique", "relation alimentaire", "expérience de laboratoire"],
+    correct: "réaction chimique" },
 // num = 3
-  { intit: 'Un objet qui tourne autour d’un axe est en (CHAMP).',
-    choix: ['rotation', 'équilibre', 'translation'],
-    correct: 'rotation' },
+  { intit: "Energie atomique a pour synonyme énergie (CHAMP).",
+    correct: "nucléaire" },
 // num = 4
   //
-  { intit: 'Un objet qui se déplace en ligne droite sans tourner est en (CHAMP).',
-    choix: ['rotation circulaire', 'translation rectiligne', 'accélération'],
-    correct: 'translation rectiligne' },
+  { intit: "Le gaz naturel est une (CHAMP).",
+    choix: ["forme d'énergie", "énergie renouvelable", "source d'énergie"],
+    correct: "source d'énergie" },
 // num = 5
-  { intit: 'La durée d’un mouvement peut se mesurer en (CHAMP).',
-    choix: ['mètre', 'kilomètre', 'seconde'],
-    correct: 'seconde' },
+  { intit: "Une conversion d'énergie est le passage d'une (CHAMP) d'énergie à une autre.",
+    choix: ["version", "forme", "source"],
+    correct: "forme" },
 // num = 6
-  { intit: 'Un mouvement qui va de plus en plus vite est un mouvement (CHAMP).',
-    choix: ['rapide', 'accéléré', 'moins lent'],
-    correct: 'accéléré' },
+  { intit: "La lumière contient de l'énergie (CHAMP).",
+    choix: ["électrique", "rayonnante", "thermique"],
+    correct: "accéléré" },
 // num = 7
-  { intit: 'La vitesse d’un objet correspond à la longueur qu’il parcourt dans une unité de (CHAMP).',
-    choix: ['masse', 'temps', 'longueur'],
-    correct: 'temps' },
+  { intit: "Dans une bouilloire électrique, l'énergie entrante est convertie en (CHAMP).",
+    choix: ["chaleur", "vapeur", "énergie chimique"],
+    correct: "chaleur" },
 // num = 8
-  { intit: 'Le lieu précis où se trouve un objet dans l’espace est sa (CHAMP).',
-    choix: ['position', 'trajectoire', 'précision'],
-    correct: 'position' },
+  { intit: "L'énergie de mouvement est une énergie (CHAMP).",
+    choix: ["d'agitation", "rotative", "mécanique"],
+    correct: "mécanique" },
 // num = 9
-  { intit: 'Si je marche d’un pas de plus en plus rapide, je peux augmenter ma (CHAMP).',
-    choix: ['translation', 'trajectoire', 'vitesse'],
-    correct: 'vitesse' },
+  { intit: "Dans ma lampe de bureau, l'énergie électrique est convertie en énergie lumineuse au niveau de (CHAMP).",
+    choix: ["l'interrupeur", "l'ampoule électrique", "l'abat-jour"],
+    correct: "l'ampoule électrique" },
 // num = 10
-  { intit: 'À la vitesse de 5 m/s, je parcours en 1 min (CHAMP).',
-    choix: ['50 m', '30 m', '300 m'],
-    correct: '300 m' },
+  { intit: "Les nutriments que j'assimile quand je mange fournissent à mon corps de l'(CHAMP).",
+    choix: ["énergie chimique", "énergie hydraulique", "énergie atomique"],
+    correct: "énergie chimique" },
 // num = 11
-  { intit: 'J’ai parcouru 3 km en 20 min. Ma vitesse moyenne était de (CHAMP).',
-    choix: ['1 km/h', '1 m/s', '9 km/h'],
-    correct: '9 km/h' },
+  { intit: "L'uranium (CHAMP) une forme d'énergie.",
+    choix: ["est", "n'est pas"],
+    correct: "n'est pas" },
 // num = 12
-  { intit: 'Ma gomme est tombée de ma poche. Elle n’a rencontré aucun obstacle au milieu de la cage d’escalier. Son mouvement était (CHAMP).',
-    choix: ['décéléré', 'accéléré', 'à vitesse constante'],
-    correct: 'accéléré' },
+  { intit: "Le moteur du lave-linge convertit (CHAMP).",
+    choix: ["l'énergie mécanique en énergie thermique", "l'énergie mécanique en énergie électrique", "l'énergie électrique en énergie mécanique"],
+    correct: "l'énergie électrique en énergie mécanique" },
 // num = 13
-  { intit: 'La vitesse peut se mesurer en (CHAMP).',
-    choix: ['g/L', 'km', 'km/h'],
-    correct: 'km/h' },
+  { intit: "Mes muscles en action fournissent à mon corps de l'(CHAMP).",
+    choix: ["énergie mécanique", "énergie électrique", "énergie chimique"],
+    correct: "énergie mécanique" },
 // num = 14
-  { intit: 'Une hirondelle qui tournoie dans l’air en chassant les insectes a, par rapport à moi qui la regarde, un mouvement (CHAMP).',
-    choix: ['de rotation', 'quelconque', 'de translation'],
-    correct: 'quelconque' },
+  { intit: "La masse, la température et l'énergie sont des (CHAMP).",
+    choix: ["unités de mesure", "grandeurs physiques", "unités de pression"],
+    correct: "grandeurs physiques" },
 // num = 15
-  { intit: 'Le train qui va s’arrêter en gare a, par rapport au quai, un mouvement de (CHAMP).',
-    choix: ['translation rectiligne accélérée', 'translation rectiligne décélérée', 'rotation constante'],
-    correct: 'translation rectiligne décélérée' },
+  { intit: "Le Joule (J) ou la calorie (cal) sont des (CHAMP).",
+    choix: ["unités d'énergie", "grandeurs physiques", "unités de pression"],
+    correct: "unités d'énergie" },
 // num = 16
-  { intit: '… et la roue de ce même train a, toujours par rapport au quai, un mouvement (CHAMP).',
-    choix: ['de rotation', 'quelconque', 'de translation et de rotation'],
-    correct: 'de translation et de rotation' },
+  { intit: "L'énergie électrique produite dans les centrales arrive chez les usagers (CHAMP).",
+    choix: ["intégralement, sans aucune perte", "diminuée de 7% au cours du transport", "diminuée de 70% au cours du transport"],
+    correct: "diminuée de 70% au cours du transport" },
 // num = 17
-  { intit: 'Pour déboucher ma bouteille d’eau, je dévisse son bouchon. Celui-ci a, par rapport à la bouteille, un mouvement de (CHAMP).',
-    choix: ['rotation', 'translation', 'rotation + translation'],
-    correct: 'rotation + translation' },
+  { intit: "(CHAMP) sont trois sources d'énergie renouvelable.",
+    choix: ["Le charbon, l'acier et l'aluminium", "L'uranium, le bois et le soleil", "Le soleil, le vent et l'eau"],
+    correct: "Le soleil, le vent et l'eau" },
 // num = 18
-  { intit: 'Si je double ma vitesse moyenne pour aller de Paris à Bordeaux, la longueur de mon déplacement est (CHAMP).',
-    choix: ['divisée par deux', 'multipliée par deux', 'inchangée'],
-    correct: 'inchangée' },
+  { intit: "La source d'énergie qui représente la plus grande part de la consommation française est (CHAMP).",
+    choix: ["le charbon", "le vent", "le pétrole"],
+    correct: "le pétrole" },
 // num = 19
-  { intit: 'En même temps que j’ouvre la porte, j’en relève la poignée. La trajectoire de l’extrémité de cette poignée est (CHAMP).',
-    choix: ['un cercle', 'une ligne droite', 'une ligne quelconque'],
-    correct: 'une ligne quelconque' },
+  { intit: "(CHAMP) sont deux conséquences d'une utilisation excessive des énergies fossiles.",
+    choix: ["La déforestation et la baisse du niveau des océans", "Le réchauffement climatique et la pollution des grandes villes"],
+    correct: "Le réchauffement climatique et la pollution des grandes villes" },
 // num = 20
-  { intit: 'Le bus 39 dans lequel je me trouve roule en ligne droite vers la station Pasteur, à la vitesse de 39 km/h. Une ambulance de l’hôpital Necker le dépasse. Sa vitesse par rapport au bus vaut 21 km/h.<br>La vitesse à laquelle roule l’ambulance vaut (CHAMP).',
-    choix: ['18 km/h', '60 km/h', '78 km/h'],
-    correct: '18 km/h' }
+  { intit: "En France, l'électricité est produite en majorité par (CHAMP).",
+    choix: ["des centrales nucléaires", "des éoliennes", "des centrales hydroélectriques"; "des centrales à charbon"],
+    correct: "des centrales nucléaires" }
 ];
 
 // ————————————————————————————
 // TEINTE DE LA COULEUR DU FOND
 // ————————————————————————————
-const COULEUR = 200; // —> bleu
+const COULEUR = 0; // —> bleu
                      // la teinte peut être choisie sur
 		     // https://codepen.io/HunorMarton/pen/dvXVvQ
 		     // la saturation est fixée à 70%
@@ -107,7 +105,7 @@ const COULEUR = 200; // —> bleu
 // ————————————
 // MOT DE PASSE
 // ————————————
-const MDP = 'translatio';
+const MDP = "énergumène";
 
 // ———————————
 // REDIRECTION
@@ -133,12 +131,12 @@ function redirection() {
       case 4:                   // ici : si on a donné 3 ou 4 réponses justes
         num = 8;                // alors on passe à la question 8 …
 	bloc = 2;               // … du bloc 2
-	console.log('saut —> question 8'); // ce qui s’affiche dans la console
+	console.log("saut —> question 8"); // ce qui s’affiche dans la console
 	break;                  // fin des opérations pour ce bloc conditionnel
       case 5:                   // si points = 5
         num = 10;               // —> question 10 …
 	bloc = 3;               // … du bloc 3
-	console.log('saut —> question 10');
+	console.log("saut —> question 10");
 	break;
       default:                  // si points n’est pas égal à 3, 4 ou 5
         num++;                  // —> question suivante …
@@ -156,22 +154,22 @@ function redirection() {
       case 6:
       	num = 15;
       	bloc = 5;
-      	console.log('saut —> question 15');
+      	console.log("saut —> question 15");
       	break;
       case 7:
         num = 17;
 	bloc = 6;
-	console.log('saut —> question 17');
+	console.log("saut —> question 17");
 	break;
       case 8:
         num = 18;
 	bloc = 7;
-	console.log('saut —> question 18');
+	console.log("saut —> question 18");
 	break;
       default:
         num = 13;
 	bloc = 4;
-      	console.log('saut —> question 13');
+      	console.log("saut —> question 13");
 	break;
     }
   } else if (
