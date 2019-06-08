@@ -12,10 +12,10 @@
 const Q = [
   { titre: "l'énergie" },
 // num = 1
-  { intit: "En physique, l'(CHAMP) s'appelle aussi 'chaleur'.",
+  { intit: "En physique, l’(CHAMP) s’appelle aussi 'chaleur'.",
     correct: "énergie thermique" },
 // num = 2
-  { intit: "L'énergie chimique est le produit d'une (CHAMP).",
+  { intit: "L’énergie chimique est le produit d’une (CHAMP).",
     choix: ["réaction chimique", "relation alimentaire", "expérience de laboratoire"],
     correct: "réaction chimique" },
 // num = 3
@@ -27,31 +27,31 @@ const Q = [
     choix: ["forme d'énergie", "énergie renouvelable", "source d'énergie"],
     correct: "source d'énergie" },
 // num = 5
-  { intit: "Une conversion d'énergie est le passage d'une (CHAMP) d'énergie à une autre.",
+  { intit: "Une conversion d’énergie est le passage d’une (CHAMP) d’énergie à une autre.",
     choix: ["version", "forme", "source"],
     correct: "forme" },
 // num = 6
-  { intit: "La lumière contient de l'énergie (CHAMP).",
+  { intit: "La lumière contient de l’énergie (CHAMP).",
     choix: ["électrique", "rayonnante", "thermique"],
     correct: "accéléré" },
 // num = 7
-  { intit: "Dans une bouilloire électrique, l'énergie entrante est convertie en (CHAMP).",
+  { intit: "Dans une bouilloire électrique, l’énergie entrante est convertie en (CHAMP).",
     choix: ["chaleur", "vapeur", "énergie chimique"],
     correct: "chaleur" },
 // num = 8
-  { intit: "L'énergie de mouvement est une énergie (CHAMP).",
+  { intit: "L’énergie de mouvement est une énergie (CHAMP).",
     choix: ["d'agitation", "rotative", "mécanique"],
     correct: "mécanique" },
 // num = 9
-  { intit: "Dans ma lampe de bureau, l'énergie électrique est convertie en énergie lumineuse au niveau de (CHAMP).",
+  { intit: "Dans ma lampe de bureau, l’énergie électrique est convertie en énergie lumineuse au niveau de (CHAMP).",
     choix: ["l'interrupeur", "l'ampoule électrique", "l'abat-jour"],
     correct: "l'ampoule électrique" },
 // num = 10
-  { intit: "Les nutriments que j'assimile quand je mange fournissent à mon corps de l'(CHAMP).",
+  { intit: "Les nutriments que j’assimile quand je mange fournissent à mon corps de l’(CHAMP).",
     choix: ["énergie chimique", "énergie hydraulique", "énergie atomique"],
     correct: "énergie chimique" },
 // num = 11
-  { intit: "L'uranium (CHAMP) une forme d'énergie.",
+  { intit: "L’uranium (CHAMP) une forme d’énergie.",
     choix: ["est", "n'est pas"],
     correct: "n'est pas" },
 // num = 12
@@ -59,11 +59,11 @@ const Q = [
     choix: ["l'énergie mécanique en énergie thermique", "l'énergie mécanique en énergie électrique", "l'énergie électrique en énergie mécanique"],
     correct: "l'énergie électrique en énergie mécanique" },
 // num = 13
-  { intit: "Mes muscles en action fournissent à mon corps de l'(CHAMP).",
+  { intit: "Mes muscles en action fournissent à mon corps de l’(CHAMP).",
     choix: ["énergie mécanique", "énergie électrique", "énergie chimique"],
     correct: "énergie mécanique" },
 // num = 14
-  { intit: "La masse, la température et l'énergie sont des (CHAMP).",
+  { intit: "La masse, la température et l’énergie sont des (CHAMP).",
     choix: ["unités de mesure", "grandeurs physiques", "unités de pression"],
     correct: "grandeurs physiques" },
 // num = 15
@@ -71,23 +71,23 @@ const Q = [
     choix: ["unités d'énergie", "grandeurs physiques", "unités de pression"],
     correct: "unités d'énergie" },
 // num = 16
-  { intit: "L'énergie électrique produite dans les centrales arrive chez les usagers (CHAMP).",
+  { intit: "L’énergie électrique produite dans les centrales arrive chez les usagers (CHAMP).",
     choix: ["intégralement, sans aucune perte", "diminuée de 7% au cours du transport", "diminuée de 70% au cours du transport"],
     correct: "diminuée de 70% au cours du transport" },
 // num = 17
-  { intit: "(CHAMP) sont trois sources d'énergie renouvelable.",
+  { intit: "(CHAMP) sont trois sources d’énergie renouvelable.",
     choix: ["Le charbon, l'acier et l'aluminium", "L'uranium, le bois et le soleil", "Le soleil, le vent et l'eau"],
     correct: "Le soleil, le vent et l'eau" },
 // num = 18
-  { intit: "La source d'énergie qui représente la plus grande part de la consommation française est (CHAMP).",
+  { intit: "La source d’énergie qui représente la plus grande part de la consommation française est (CHAMP).",
     choix: ["le charbon", "le vent", "le pétrole"],
     correct: "le pétrole" },
 // num = 19
-  { intit: "(CHAMP) sont deux conséquences d'une utilisation excessive des énergies fossiles.",
+  { intit: "(CHAMP) sont deux conséquences d’une utilisation excessive des énergies fossiles.",
     choix: ["La déforestation et la baisse du niveau des océans", "Le réchauffement climatique et la pollution des grandes villes"],
     correct: "Le réchauffement climatique et la pollution des grandes villes" },
 // num = 20
-  { intit: "En France, l'électricité est produite en majorité par (CHAMP).",
+  { intit: "En France, l’électricité est produite en majorité par (CHAMP).",
     choix: ["des centrales nucléaires", "des éoliennes", "des centrales hydroélectriques", "des centrales à charbon"],
     correct: "des centrales nucléaires" }
 ];
