@@ -10,22 +10,22 @@
 // TITRE ET QUESTIONS
 // ——————————————————
 const Q = [
-  { titre: "l'énergie" },
+  { titre: "l’énergie" },
 // num = 1
-  { intit: "En physique, l’(CHAMP) s’appelle aussi 'chaleur'.",
+  { intit: "En physique, l’(CHAMP) s’appelle aussi « chaleur ».",
     correct: "énergie thermique" },
 // num = 2
-  { intit: "L’énergie chimique est le produit d’une (CHAMP).",
+  { intit: "L'énergie chimique est le produit d'une (CHAMP).",
     choix: ["réaction chimique", "relation alimentaire", "expérience de laboratoire"],
     correct: "réaction chimique" },
 // num = 3
-  { intit: "Energie atomique a pour synonyme énergie (CHAMP).",
+  { intit: "« Énergie atomique » a pour synonyme « énergie (CHAMP) ».",
     correct: "nucléaire" },
 // num = 4
   //
   { intit: "Le gaz naturel est une (CHAMP).",
-    choix: ["forme d'énergie", "énergie renouvelable", "source d'énergie"],
-    correct: "source d'énergie" },
+    choix: ["forme d’énergie", "énergie renouvelable", "source d’énergie"],
+    correct: "source d’énergie" },
 // num = 5
   { intit: "Une conversion d’énergie est le passage d’une (CHAMP) d’énergie à une autre.",
     choix: ["version", "forme", "source"],
@@ -40,24 +40,24 @@ const Q = [
     correct: "chaleur" },
 // num = 8
   { intit: "L’énergie de mouvement est une énergie (CHAMP).",
-    choix: ["d'agitation", "rotative", "mécanique"],
+    choix: ["d’agitation", "rotative", "mécanique"],
     correct: "mécanique" },
 // num = 9
   { intit: "Dans ma lampe de bureau, l’énergie électrique est convertie en énergie lumineuse au niveau de (CHAMP).",
-    choix: ["l'interrupeur", "l'ampoule électrique", "l'abat-jour"],
-    correct: "l'ampoule électrique" },
+    choix: ["l’interrupteur", "l’ampoule électrique", "l’abat-jour"],
+    correct: "l’ampoule électrique" },
 // num = 10
   { intit: "Les nutriments que j’assimile quand je mange fournissent à mon corps de l’(CHAMP).",
     choix: ["énergie chimique", "énergie hydraulique", "énergie atomique"],
     correct: "énergie chimique" },
 // num = 11
   { intit: "L’uranium (CHAMP) une forme d’énergie.",
-    choix: ["est", "n'est pas"],
-    correct: "n'est pas" },
+    choix: ["est", "n’est pas"],
+    correct: "n’est pas" },
 // num = 12
   { intit: "Le moteur du lave-linge convertit (CHAMP).",
-    choix: ["l'énergie mécanique en énergie thermique", "l'énergie mécanique en énergie électrique", "l'énergie électrique en énergie mécanique"],
-    correct: "l'énergie électrique en énergie mécanique" },
+    choix: ["l’énergie mécanique en énergie thermique", "l’énergie mécanique en énergie électrique", "l’énergie électrique en énergie mécanique"],
+    correct: "l’énergie électrique en énergie mécanique" },
 // num = 13
   { intit: "Mes muscles en action fournissent à mon corps de l’(CHAMP).",
     choix: ["énergie mécanique", "énergie électrique", "énergie chimique"],
@@ -68,16 +68,16 @@ const Q = [
     correct: "grandeurs physiques" },
 // num = 15
   { intit: "Le Joule (J) ou la calorie (cal) sont des (CHAMP).",
-    choix: ["unités d'énergie", "grandeurs physiques", "unités de pression"],
-    correct: "unités d'énergie" },
+    choix: ["unités d’énergie", "grandeurs physiques", "unités de pression"],
+    correct: "unités d’énergie" },
 // num = 16
   { intit: "L’énergie électrique produite dans les centrales arrive chez les usagers (CHAMP).",
     choix: ["intégralement, sans aucune perte", "diminuée de 7% au cours du transport", "diminuée de 70% au cours du transport"],
     correct: "diminuée de 70% au cours du transport" },
 // num = 17
   { intit: "(CHAMP) sont trois sources d’énergie renouvelable.",
-    choix: ["Le charbon, l'acier et l'aluminium", "L'uranium, le bois et le soleil", "Le soleil, le vent et l'eau"],
-    correct: "Le soleil, le vent et l'eau" },
+    choix: ["Le charbon, l’acier et l’aluminium", "L’uranium, le bois et le soleil", "Le soleil, le vent et l’eau"],
+    correct: "Le soleil, le vent et l’eau" },
 // num = 18
   { intit: "La source d’énergie qui représente la plus grande part de la consommation française est (CHAMP).",
     choix: ["le charbon", "le vent", "le pétrole"],
@@ -97,10 +97,10 @@ const Q = [
 // ————————————————————————————
 const COULEUR = 0; // —> bleu
                      // la teinte peut être choisie sur
-		     // https://codepen.io/HunorMarton/pen/dvXVvQ
-		     // la saturation est fixée à 70%
-		     // la luminosité évolue entre 100% et (100 - avancement×2)%
-		     // la page finale affiche une luminosité de 60%
+                     // https://codepen.io/HunorMarton/pen/dvXVvQ
+                     // la saturation est fixée à 70%
+                     // la luminosité évolue entre 100% et (100 - avancement×2)%
+                     // la page finale affiche une luminosité de 60%
 
 // ————————————
 // MOT DE PASSE
@@ -130,18 +130,18 @@ function redirection() {
       case 3:                   // … réponses justes (points = note / 2)
       case 4:                   // ici : si on a donné 3 ou 4 réponses justes
         num = 8;                // alors on passe à la question 8 …
-	bloc = 2;               // … du bloc 2
-	console.log("saut —> question 8"); // ce qui s’affiche dans la console
-	break;                  // fin des opérations pour ce bloc conditionnel
+        bloc = 2;               // … du bloc 2
+        console.log("saut —> question 8"); // ce qui s’affiche dans la console
+        break;                  // fin des opérations pour ce bloc conditionnel
       case 5:                   // si points = 5
         num = 10;               // —> question 10 …
-	bloc = 3;               // … du bloc 3
-	console.log("saut —> question 10");
-	break;
+        bloc = 3;               // … du bloc 3
+        console.log("saut —> question 10");
+        break;
       default:                  // si points n’est pas égal à 3, 4 ou 5
         num++;                  // —> question suivante …
-	bloc = 1;               // du bloc 1
-	break;
+        bloc = 1;               // du bloc 1
+        break;
     }
   } else if (
        num === 8 && bloc === 1
@@ -152,25 +152,25 @@ function redirection() {
       case 4:
       case 5:
       case 6:
-      	num = 15;
-      	bloc = 5;
-      	console.log("saut —> question 15");
-      	break;
+        num = 15;
+        bloc = 5;
+        console.log("saut —> question 15");
+        break;
       case 7:
         num = 17;
-	bloc = 6;
-	console.log("saut —> question 17");
-	break;
+        bloc = 6;
+        console.log("saut —> question 17");
+        break;
       case 8:
         num = 18;
-	bloc = 7;
-	console.log("saut —> question 18");
-	break;
+        bloc = 7;
+        console.log("saut —> question 18");
+        break;
       default:
         num = 13;
-	bloc = 4;
-      	console.log("saut —> question 13");
-	break;
+        bloc = 4;
+        console.log("saut —> question 13");
+        break;
     }
   } else if (
        num === 14
@@ -187,7 +187,7 @@ function redirection() {
 // NOTE
 // ————
 const COEFF = 2; // coefficient à appliquer à une réponse juste pour le calcul …
-		 // … de la note finale
+                 // … de la note finale
 
 // ————————————————————————————————————————————————————————————————
 // APPARITION D’UNE FOURCHETTE DE QUESTIONS DANS UN ORDRE ALÉATOIRE

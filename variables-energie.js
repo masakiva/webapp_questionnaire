@@ -97,10 +97,10 @@ const Q = [
 // ————————————————————————————
 const COULEUR = 0; // —> bleu
                      // la teinte peut être choisie sur
-		     // https://codepen.io/HunorMarton/pen/dvXVvQ
-		     // la saturation est fixée à 70%
-		     // la luminosité évolue entre 100% et (100 - avancement×2)%
-		     // la page finale affiche une luminosité de 60%
+                     // https://codepen.io/HunorMarton/pen/dvXVvQ
+                     // la saturation est fixée à 70%
+                     // la luminosité évolue entre 100% et (100 - avancement×2)%
+                     // la page finale affiche une luminosité de 60%
 
 // ————————————
 // MOT DE PASSE
@@ -130,18 +130,18 @@ function redirection() {
       case 3:                   // … réponses justes (points = note / 2)
       case 4:                   // ici : si on a donné 3 ou 4 réponses justes
         num = 8;                // alors on passe à la question 8 …
-	bloc = 2;               // … du bloc 2
-	console.log("saut —> question 8"); // ce qui s’affiche dans la console
-	break;                  // fin des opérations pour ce bloc conditionnel
+        bloc = 2;               // … du bloc 2
+        console.log("saut —> question 8"); // ce qui s’affiche dans la console
+        break;                  // fin des opérations pour ce bloc conditionnel
       case 5:                   // si points = 5
         num = 10;               // —> question 10 …
-	bloc = 3;               // … du bloc 3
-	console.log("saut —> question 10");
-	break;
+        bloc = 3;               // … du bloc 3
+        console.log("saut —> question 10");
+        break;
       default:                  // si points n’est pas égal à 3, 4 ou 5
         num++;                  // —> question suivante …
-	bloc = 1;               // du bloc 1
-	break;
+        bloc = 1;               // du bloc 1
+        break;
     }
   } else if (
        num === 8 && bloc === 1
@@ -152,25 +152,25 @@ function redirection() {
       case 4:
       case 5:
       case 6:
-      	num = 15;
-      	bloc = 5;
-      	console.log("saut —> question 15");
-      	break;
+        num = 15;
+        bloc = 5;
+        console.log("saut —> question 15");
+        break;
       case 7:
         num = 17;
-	bloc = 6;
-	console.log("saut —> question 17");
-	break;
+        bloc = 6;
+        console.log("saut —> question 17");
+        break;
       case 8:
         num = 18;
-	bloc = 7;
-	console.log("saut —> question 18");
-	break;
+        bloc = 7;
+        console.log("saut —> question 18");
+        break;
       default:
         num = 13;
-	bloc = 4;
-      	console.log("saut —> question 13");
-	break;
+        bloc = 4;
+        console.log("saut —> question 13");
+        break;
     }
   } else if (
        num === 14
@@ -187,7 +187,7 @@ function redirection() {
 // NOTE
 // ————
 const COEFF = 2; // coefficient à appliquer à une réponse juste pour le calcul …
-		 // … de la note finale
+                 // … de la note finale
 
 // ————————————————————————————————————————————————————————————————
 // APPARITION D’UNE FOURCHETTE DE QUESTIONS DANS UN ORDRE ALÉATOIRE

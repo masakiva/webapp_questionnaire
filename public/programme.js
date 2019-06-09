@@ -23,6 +23,7 @@ function initialisation() {
   num = 0;
   avanc = 0;
   points = 0;
+  CHAMP.value = '';
   CHAMP.focus();
   Q_DEBUT.textContent = 'Ceci est un questionnaire sur ';
   Q_FIN.textContent = '.';
@@ -54,15 +55,17 @@ function afficheResultats() {
   MAIN.removeChild(MAIN.lastChild);
   MAIN.style.width = 'auto';
   QUESTION.style.textAlign = 'center';
-  FLECHE.style.display = 'inline-block'; 
-  QUESTION.style.display = 'inline-block'; 
+  FLECHE.style.display = 'inline-block';
+  QUESTION.style.display = 'inline-block';
 }
 
 function details() {
-  FLECHE.style.visibility = 'hidden'; 
+  QUESTION.style.display = 'block';
+  FLECHE.style.display = 'none';
   const DETAILS = document.createElement('p');
   MAIN.appendChild(DETAILS);
-  DETAILS.innerHTML = resultats;
+  DETAILS.style.whiteSpace = 'pre-line';
+  DETAILS.textContent = resultats;
 }
 
 function fin() {
@@ -113,8 +116,8 @@ function suivant() {
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
   const Q_INTIT = Q[num].intit.split('(CHAMP)');
-  Q_DEBUT.textContent = Q_INTIT[0];
-  Q_FIN.textContent = Q_INTIT[1];
+  Q_DEBUT.textContent = Q_INTIT[0].replace("'", "’");
+  Q_FIN.textContent = Q_INTIT[1].replace("'", "’");
   if (Q_FIN.textContent === ".") {
     CHAMPOINT.style.whiteSpace = 'nowrap';
   } else {
@@ -124,46 +127,66 @@ function suivant() {
     LISTE.removeChild(LISTE.firstChild);
   }
   if (Q[num].hasOwnProperty('choix')) {
+    tailleChamp = 0;
     for (let i = 0; i < Q[num].choix.length; i++) {
       if (Q[num].choix[i].length > tailleChamp) {
-	tailleChamp = Q[num].choix[i].length;
+        tailleChamp = Q[num].choix[i].length;
       }
     }
     CHAMP.setAttribute('size', tailleChamp);
     CHAMP.style.width = 'unset';
     LISTE.style.display = 'block';
-    const CHOIX_MELANGES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
+    const CHOIX_MELES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
     for (let i = 0; i < Q[num].choix.length; i++) {
       const CHOIX_SUPPL = document.createElement('li');
-      const CHOIX = document.createTextNode(CHOIX_MELANGES[i]);
+      const CHOIX = document.createTextNode(CHOIX_MELES[i].replace("'", "’"));
       CHOIX_SUPPL.appendChild(CHOIX);
       LISTE.appendChild(CHOIX_SUPPL);
     }
   } else {
     LISTE.style.display = 'none';
-    CHAMP.style.width = '100%';
+    tailleChamp = Q[num].correct.length;
+    if (tailleChamp < 21) {
+      CHAMP.setAttribute('size', '20');
+    } else {
+      CHAMP.setAttribute('size', tailleChamp);
+    }
   }
 }
 
 function verifieReponse() {
-  if (CHAMP.value === Q[num].correct) {
+  if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
+      === Q[num].correct.replace("'", "’")) {
     points++;
     if (points === 1) {
-      console.log('réponse ' + num + ' correcte : ' + points + ' point');
+      console.log('réponse [' + num + '] correcte : ' + points + ' point');
     } else {
-      console.log('réponse ' + num + ' correcte : ' + points + ' points');
+      console.log('réponse [' + num + '] correcte : ' + points + ' points');
     }
-    resultats += '<span style="color: darkgreen;">[' + num + ']</span><br>';
+    resultats += '[' + num + ']\r\n';
   } else {
-    if (num >= MELANGE[0] && num <= MELANGE[1]) {
-    console.log('réponse ' + num + ' : « ' + CHAMP.value +
-      ' » (question : ' + Q[num].intit.slice(0, 30) + '…)');
-    resultats += '<span style="color: crimson;">[' + num + '] <em>' +
-      CHAMP.value + '</em></span> (' + Q[num].intit + '…)<br>';
-    } else { 
-    console.log('réponse ' + num + ' : « ' + CHAMP.value + ' »')
-    resultats += '<span style="color: crimson;">[' + num +
-      '] <em>' + CHAMP.value + '</em></span><br>';
+    if (Q[num].hasOwnProperty('choix')) {
+      if (num >= MELANGE[0] && num <= MELANGE[1]) {
+      console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] + '] : « ' +
+        CHAMP.value + ' » (question : ' +
+        Q[num].intit.replace('(CHAMP)', '[…]') + ')');
+      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] « ' +
+        CHAMP.value + ' » (' + Q[num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+      } else {
+      console.log('réponse [' + num + '] : « ' + CHAMP.value + ' »')
+      resultats += '[' + num + '] « ' + CHAMP.value + ' »\r\n';
+      }
+    } else {
+      if (num >= MELANGE[0] && num <= MELANGE[1]) {
+      console.log('réponse libre [' + MELANGE[0] + ' – ' + MELANGE[1] +
+        '] : « ' + CHAMP.value + ' » (question : ' +
+        Q[num].intit.replace('(CHAMP)', '[…]') + ')');
+      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] (libre) « ' +
+        CHAMP.value + ' » (' + Q[num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+      } else {
+      console.log('réponse libre [' + num + '] : « ' + CHAMP.value + ' »')
+      resultats += '[' + num + '] (libre) « ' + CHAMP.value + ' »\r\n';
+      }
     }
   }
   redirection();
@@ -176,7 +199,8 @@ function reponseInvalide() {
 
 function traiteReponse() {
   if (num === 0) {
-    if (CHAMP.value === Q[0].titre) {
+    if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
+      === Q[0].titre.replace("'", "’")) {
       num++;
       suivant(num);
     } else {
@@ -185,13 +209,14 @@ function traiteReponse() {
   } else {
     if (Q[num].hasOwnProperty('choix')) {
       for (let i = 0; i < Q[num].choix.length; i++) {
-	if (CHAMP.value === Q[num].choix[i]) {
-	  verifieReponse();
-	  return;
-	} else if (i === Q[num].choix.length - 1) {
-	  reponseInvalide();
-	  return;
-	}
+        if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
+          === Q[num].choix[i].replace("'", "’")) {
+          verifieReponse();
+          return;
+        } else if (i === Q[num].choix.length - 1) {
+          reponseInvalide();
+          return;
+        }
       }
     } else {
       verifieReponse();
