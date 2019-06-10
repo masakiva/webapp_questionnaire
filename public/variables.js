@@ -33,7 +33,7 @@ const Q = [
 // num = 6
   { intit: "La lumière contient de l’énergie (CHAMP).",
     choix: ["électrique", "rayonnante", "thermique"],
-    correct: "accéléré" },
+    correct: "rayonnante" },
 // num = 7
   { intit: "Dans une bouilloire électrique, l’énergie entrante est convertie en (CHAMP).",
     choix: ["chaleur", "vapeur", "énergie chimique"],
