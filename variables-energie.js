@@ -1,11 +1,3 @@
-// Sur Firefox, pour afficher la console JavaScript —> Ctrl-Shift-K
-// Sur IE, pour afficher les outils de développement (où se trouve la console) —> F12
-
-// pour Samir?
-// https://codepen.io/HunorMarton/full/BpvBeM
-// https://codepen.io/HunorMarton/full/mRZemO
-
-
 // ——————————————————
 // TITRE ET QUESTIONS
 // ——————————————————
