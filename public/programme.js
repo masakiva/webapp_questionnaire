@@ -158,12 +158,23 @@ function verifieReponse() {
   if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
       === Q[num].correct.replace("'", "’")) {
     points++;
-    if (points === 1) {
-      console.log('réponse [' + num + '] correcte : ' + points + ' point');
+    if (num >= MELANGE[0] && num <= MELANGE[1]) {
+      if (points === 1) {
+        console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] +
+          '] correcte : ' + points + ' point');
+      } else {
+        console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] +
+          '] correcte : ' + points + ' points');
+      }
+      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + ']\r\n';
     } else {
-      console.log('réponse [' + num + '] correcte : ' + points + ' points');
+      if (points === 1) {
+        console.log('réponse [' + num + '] correcte : ' + points + ' point');
+      } else {
+        console.log('réponse [' + num + '] correcte : ' + points + ' points');
+      }
+      resultats += '[' + num + ']\r\n';
     }
-    resultats += '[' + num + ']\r\n';
   } else {
     if (Q[num].hasOwnProperty('choix')) {
       if (num >= MELANGE[0] && num <= MELANGE[1]) {
