@@ -1,3 +1,4 @@
+'use strict';
 const BODY = document.body;
 const MAIN = document.querySelector('main');
 const FLECHE = document.querySelector('.fleche');
@@ -52,7 +53,7 @@ function afficheResultats() {
   const SUP = document.createElement('sup');
   const FRASL = document.createTextNode ('\u2044');
   const SUB = document.createElement('sub');
-  SUP.textContent = points * COEFF;
+  SUP.textContent = points * COEFF[numQ];
   SUB.textContent = '20';
   Q_FIN.textContent = '';
   Q_FIN.appendChild(SUP);
@@ -76,7 +77,7 @@ function details() {
 
 function fin() {
   avanc++;
-  BODY.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, 60%)';
+  BODY.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 60%)';
   Q_DEBUT.textContent = 'C’est terminé, restez sur cette page et attendez ' +
     'le passage du professeur.';
   CHAMP.style.display = 'none';
@@ -87,9 +88,9 @@ function fin() {
   const CHAMP_MDP = document.createElement('input');
   MAIN.appendChild(CHAMP_MDP).type = 'password';
   CHAMP_MDP.setAttribute('class', 'orange');
-  CHAMP_MDP.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, 50%)';
+  CHAMP_MDP.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 50%)';
   CHAMP_MDP.onkeydown = function(e) {
-    if (e.keyCode === 13 && CHAMP_MDP.value === MDP) { afficheResultats(); }
+    if (e.keyCode === 13 && CHAMP_MDP.value === MDP[numQ]) { afficheResultats(); }
   };
 }
 
@@ -114,8 +115,8 @@ function suivant() {
     return;
   }
   avanc++;
-  let lumbleu = 100 - avanc * 2;
-  BODY.style.backgroundColor = 'hsl(' + COULEUR + ', 70%, ' + lumbleu + '%)';
+  let lum = 100 - avanc * 2;
+  BODY.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, ' + lum + '%)';
   document.title = 'Question ' + avanc;
   CHAMP.value = '';
   CHAMP.focus();
@@ -164,15 +165,15 @@ function verifieReponse() {
   if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
       === Q[numQ][num].correct.replace("'", "’")) {
     points++;
-    if (num >= MELANGE[0] && num <= MELANGE[1]) {
+    if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
       if (points === 1) {
-        console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] +
+        console.log('réponse [' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
           '] correcte : ' + points + ' point');
       } else {
-        console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] +
+        console.log('réponse [' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
           '] correcte : ' + points + ' points');
       }
-      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + ']\r\n';
+      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] + ']\r\n';
     } else {
       if (points === 1) {
         console.log('réponse [' + num + '] correcte : ' + points + ' point');
@@ -183,11 +184,11 @@ function verifieReponse() {
     }
   } else {
     if (Q[numQ][num].hasOwnProperty('choix')) {
-      if (num >= MELANGE[0] && num <= MELANGE[1]) {
-      console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] + '] : « ' +
-        CHAMP.value + ' » (question : ' +
+      if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
+      console.log('réponse [' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
+        '] : « ' + CHAMP.value + ' » (question : ' +
         Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
-      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] « ' +
+      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] + '] « ' +
         CHAMP.value + ' » (' + Q[numQ][num].intit.replace('(CHAMP)', '[…]') +
         ')\r\n';
       } else {
@@ -195,13 +196,13 @@ function verifieReponse() {
       resultats += '[' + num + '] « ' + CHAMP.value + ' »\r\n';
       }
     } else {
-      if (num >= MELANGE[0] && num <= MELANGE[1]) {
-      console.log('réponse libre [' + MELANGE[0] + ' – ' + MELANGE[1] +
-        '] : « ' + CHAMP.value + ' » (question : ' +
+      if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
+      console.log('réponse libre [' + MELANGE[numQ][0] + ' – ' +
+        MELANGE[numQ][1] + '] : « ' + CHAMP.value + ' » (question : ' +
         Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
-      resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] (libre) « ' +
-        CHAMP.value + ' » (' + Q[numQ][num].intit.replace('(CHAMP)', '[…]') +
-        ')\r\n';
+      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
+        '] (libre) « ' + CHAMP.value + ' » (' +
+        Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
       } else {
       console.log('réponse libre [' + num + '] : « ' + CHAMP.value + ' »')
       resultats += '[' + num + '] (libre) « ' + CHAMP.value + ' »\r\n';
@@ -224,8 +225,8 @@ function traiteReponse() {
       if (VALEUR_CHAMP === Q[i][0].titre.replace("'", "’")) {
         numQ = i;
         num++;
-        melange(Q[numQ], MELANGE[0], MELANGE[1]);
-        suivant(num);
+        melange(Q[numQ], MELANGE[numQ][0], MELANGE[numQ][1]);
+        suivant();
         return;
       }
     }
