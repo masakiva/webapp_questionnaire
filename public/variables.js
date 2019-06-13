@@ -1,3 +1,4 @@
+'use strict';
 const Q = [], COULEUR = [], MDP = [], COEFF = [], MELANGE = [];
 
 // ———————————
