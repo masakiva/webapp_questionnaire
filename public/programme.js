@@ -11,6 +11,7 @@ const CONSIGNE = document.querySelector('.consigne');
 const CONSIGNE_DEBUT = document.querySelector('.consigne-debut');
 const CONSIGNE_FIN = document.querySelector('.consigne-fin');
 
+let numQ;
 let tailleChamp = 0;
 let num;
 let avanc;
@@ -30,7 +31,12 @@ function initialisation() {
   QUESTION.style.fontSize = '35px';
   QUESTION.style.fontWeight = '600';
   CHAMP.style.fontSize = '32px';
-  CHAMP.setAttribute('size', Q[0].titre.length);
+  for (let i = 0; i < Q.length; i++) {
+    if (tailleChamp < Q[i][0].titre.length) {
+      tailleChamp = Q[i][0].titre.length;
+    }
+  }
+  CHAMP.setAttribute('size', tailleChamp);
   CONSIGNE_DEBUT.textContent = 'Saisis dans le champ le titre du ' +
     'questionnaire noté au tableau et valide par la touche'
   CONSIGNE_FIN.textContent = 'Entrée.';
@@ -94,7 +100,6 @@ function melange(liste, min, max) {
   }
   return liste;
 }
-melange(Q, MELANGE[0], MELANGE[1]);
 
 function suivant() {
   if (num === 1) {
@@ -105,7 +110,7 @@ function suivant() {
     CONSIGNE_DEBUT.textContent = 'Recopie la bonne réponse dans le champ ' +
       'sans te tromper et valide-la par la touche ';
   }
-  if (num >= Q.length) {
+  if (num >= Q[numQ].length) {
     return;
   }
   avanc++;
@@ -115,7 +120,7 @@ function suivant() {
   CHAMP.value = '';
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
-  const Q_INTIT = Q[num].intit.split('(CHAMP)');
+  const Q_INTIT = Q[numQ][num].intit.split('(CHAMP)');
   Q_DEBUT.textContent = Q_INTIT[0].replace("'", "’");
   Q_FIN.textContent = Q_INTIT[1].replace("'", "’");
   if (Q_FIN.textContent === ".") {
@@ -126,18 +131,19 @@ function suivant() {
   while (LISTE.firstChild) {
     LISTE.removeChild(LISTE.firstChild);
   }
-  if (Q[num].hasOwnProperty('choix')) {
+  if (Q[numQ][num].hasOwnProperty('choix')) {
     tailleChamp = 0;
-    for (let i = 0; i < Q[num].choix.length; i++) {
-      if (Q[num].choix[i].length > tailleChamp) {
-        tailleChamp = Q[num].choix[i].length;
+    for (let i = 0; i < Q[numQ][num].choix.length; i++) {
+      if (tailleChamp < Q[numQ][num].choix[i].length) {
+        tailleChamp = Q[numQ][num].choix[i].length;
       }
     }
     CHAMP.setAttribute('size', tailleChamp);
     CHAMP.style.width = 'unset';
     LISTE.style.display = 'block';
-    const CHOIX_MELES = melange(Q[num].choix, 0, Q[num].choix.length - 1);
-    for (let i = 0; i < Q[num].choix.length; i++) {
+    const CHOIX_MELES =
+      melange(Q[numQ][num].choix, 0, Q[numQ][num].choix.length - 1);
+    for (let i = 0; i < Q[numQ][num].choix.length; i++) {
       const CHOIX_SUPPL = document.createElement('li');
       const CHOIX = document.createTextNode(CHOIX_MELES[i].replace("'", "’"));
       CHOIX_SUPPL.appendChild(CHOIX);
@@ -145,7 +151,7 @@ function suivant() {
     }
   } else {
     LISTE.style.display = 'none';
-    tailleChamp = Q[num].correct.length;
+    tailleChamp = Q[numQ][num].correct.length;
     if (tailleChamp < 21) {
       CHAMP.setAttribute('size', '20');
     } else {
@@ -156,7 +162,7 @@ function suivant() {
 
 function verifieReponse() {
   if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
-      === Q[num].correct.replace("'", "’")) {
+      === Q[numQ][num].correct.replace("'", "’")) {
     points++;
     if (num >= MELANGE[0] && num <= MELANGE[1]) {
       if (points === 1) {
@@ -176,13 +182,14 @@ function verifieReponse() {
       resultats += '[' + num + ']\r\n';
     }
   } else {
-    if (Q[num].hasOwnProperty('choix')) {
+    if (Q[numQ][num].hasOwnProperty('choix')) {
       if (num >= MELANGE[0] && num <= MELANGE[1]) {
       console.log('réponse [' + MELANGE[0] + ' – ' + MELANGE[1] + '] : « ' +
         CHAMP.value + ' » (question : ' +
-        Q[num].intit.replace('(CHAMP)', '[…]') + ')');
+        Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
       resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] « ' +
-        CHAMP.value + ' » (' + Q[num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+        CHAMP.value + ' » (' + Q[numQ][num].intit.replace('(CHAMP)', '[…]') +
+        ')\r\n';
       } else {
       console.log('réponse [' + num + '] : « ' + CHAMP.value + ' »')
       resultats += '[' + num + '] « ' + CHAMP.value + ' »\r\n';
@@ -191,9 +198,10 @@ function verifieReponse() {
       if (num >= MELANGE[0] && num <= MELANGE[1]) {
       console.log('réponse libre [' + MELANGE[0] + ' – ' + MELANGE[1] +
         '] : « ' + CHAMP.value + ' » (question : ' +
-        Q[num].intit.replace('(CHAMP)', '[…]') + ')');
+        Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
       resultats += '[' + MELANGE[0] + ' – ' + MELANGE[1] + '] (libre) « ' +
-        CHAMP.value + ' » (' + Q[num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+        CHAMP.value + ' » (' + Q[numQ][num].intit.replace('(CHAMP)', '[…]') +
+        ')\r\n';
       } else {
       console.log('réponse libre [' + num + '] : « ' + CHAMP.value + ' »')
       resultats += '[' + num + '] (libre) « ' + CHAMP.value + ' »\r\n';
@@ -209,22 +217,27 @@ function reponseInvalide() {
 }
 
 function traiteReponse() {
+  const VALEUR_CHAMP =
+    CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '');
   if (num === 0) {
-    if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
-      === Q[0].titre.replace("'", "’")) {
-      num++;
-      suivant(num);
-    } else {
-      reponseInvalide();
+    for (let i = 0; i < Q.length; i++) {
+      if (VALEUR_CHAMP === Q[i][0].titre.replace("'", "’")) {
+        numQ = i;
+        num++;
+        melange(Q[numQ], MELANGE[0], MELANGE[1]);
+        suivant(num);
+        return;
+      }
     }
+    reponseInvalide();
+    return;
   } else {
-    if (Q[num].hasOwnProperty('choix')) {
-      for (let i = 0; i < Q[num].choix.length; i++) {
-        if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
-          === Q[num].choix[i].replace("'", "’")) {
+    if (Q[numQ][num].hasOwnProperty('choix')) {
+      for (let i = 0; i < Q[numQ][num].choix.length; i++) {
+        if (VALEUR_CHAMP === Q[numQ][num].choix[i].replace("'", "’")) {
           verifieReponse();
           return;
-        } else if (i === Q[num].choix.length - 1) {
+        } else if (i === Q[numQ][num].choix.length - 1) {
           reponseInvalide();
           return;
         }
