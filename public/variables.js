@@ -1,3 +1,9 @@
+// Pour inclure des guillemets français dans l’intitulé d’une question, on
+// pourra écrire les caractères <& et &> à la place, qui seront transformés
+// lors de l’exécution du programme. Par exemple, <&ceci&> sera changé en
+// « ceci ». Cette transformation n’est pas disponible pour les textes des choix
+// proposés ou de la réponse correcte.
+
 'use strict';
 const Q = [], COULEUR = [], MDP = [], COEFF = [], MELANGE = [];
 
@@ -212,14 +218,14 @@ MELANGE.push(MELANGE_MOUVEMENT);
 const Q_ENERGIE = [
   { titre: "l’énergie" },
 // num = 1
-  { intit: "En physique, l’(CHAMP) s’appelle aussi « chaleur ».",
+  { intit: "En physique, l’(CHAMP) s’appelle aussi <&chaleur&>.",
     correct: "énergie thermique" },
 // num = 2
   { intit: "L'énergie chimique est le produit d'une (CHAMP).",
     choix: ["réaction chimique", "relation alimentaire", "expérience de laboratoire"],
     correct: "réaction chimique" },
 // num = 3
-  { intit: "« Énergie atomique » a pour synonyme « énergie (CHAMP) ».",
+  { intit: "<&Énergie atomique&> a pour synonyme <&énergie (CHAMP)&>.",
     correct: "nucléaire" },
 // num = 4
   //

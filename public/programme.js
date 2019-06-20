@@ -122,8 +122,10 @@ function suivant() {
   CHAMP.focus();
   CHAMP.style.backgroundColor = 'white';
   const Q_INTIT = Q[numQ][num].intit.split('(CHAMP)');
-  Q_DEBUT.textContent = Q_INTIT[0].replace("'", "’");
-  Q_FIN.textContent = Q_INTIT[1].replace("'", "’");
+  Q_DEBUT.textContent =
+    Q_INTIT[0].replace("'", "’").replace('<&', '« ').replace('&>', ' »');
+  Q_FIN.textContent =
+    Q_INTIT[1].replace("'", "’").replace('<&', '« ').replace('&>', ' »');
   if (Q_FIN.textContent === ".") {
     CHAMPOINT.style.whiteSpace = 'nowrap';
   } else {
