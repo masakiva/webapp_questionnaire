@@ -4,10 +4,15 @@
 // « ceci ». Cette transformation n’est pas disponible pour les textes des choix
 // proposés ou de la réponse correcte.
 
-'use strict';
+
+'use strict'; // ces deux lignes doivent rester inchangées
 const Q = [], COULEUR = [], MDP = [], COEFF = [], MELANGE = [];
 
 
+
+// ============
+// LE MOUVEMENT
+// ============
 
 // ——————————————————
 // TITRE ET QUESTIONS
@@ -136,6 +141,10 @@ MELANGE.push(MELANGE_MOUVEMENT);
 
 
 
+
+// =========
+// L’ÉNERGIE
+// =========
 
 // ——————————————————
 // TITRE ET QUESTIONS
