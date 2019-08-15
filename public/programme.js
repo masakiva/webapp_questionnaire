@@ -200,10 +200,10 @@ function suivant() {
   CHAMP.style.backgroundColor = 'white';
   const Q_INTIT = Q[numQ][num].intit.split('(CHAMP)');
   Q_DEBUT.textContent =
-    Q_INTIT[0].replace("'", "’").replace('<&', '« ').replace('&>', ' »');
+    Q_INTIT[0].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
   Q_FIN.textContent =
-    Q_INTIT[1].replace("'", "’").replace('<&', '« ').replace('&>', ' »');
-  if (Q_FIN.textContent === ".") {
+    Q_INTIT[1].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
+  if (Q_FIN.textContent === "." || Q_FIN.textContent === " ».") {
     CHAMPOINT.style.whiteSpace = 'nowrap';
   } else {
     CHAMPOINT.style.whiteSpace = 'unset';
@@ -225,7 +225,7 @@ function suivant() {
       melange(Q[numQ][num].choix, 0, Q[numQ][num].choix.length - 1);
     for (let i = 0; i < Q[numQ][num].choix.length; i++) {
       const CHOIX_SUPPL = document.createElement('li');
-      const CHOIX = document.createTextNode(CHOIX_MELES[i].replace("'", "’"));
+      const CHOIX = document.createTextNode(CHOIX_MELES[i].replace(/'/g, "’"));
       CHOIX_SUPPL.appendChild(CHOIX);
       LISTE.appendChild(CHOIX_SUPPL);
     }
@@ -241,8 +241,8 @@ function suivant() {
 }
 
 function verifieReponse() {
-  if (CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '')
-      === Q[numQ][num].correct.replace("'", "’")) {
+  if (CHAMP.value.replace(/'/g, "’").trim()
+      === Q[numQ][num].correct.replace(/'/g, "’")) {
     points++;
     if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
       if (points === 1) {
@@ -298,10 +298,10 @@ function reponseInvalide() {
 
 function traiteReponse() {
   const VALEUR_CHAMP =
-    CHAMP.value.replace("'", "’").replace(/^\s+|\s+$/g, '');
+    CHAMP.value.replace(/'/g, "’").trim();
   if (num === 0) {
     for (let i = 0; i < Q.length; i++) {
-      if (VALEUR_CHAMP === Q[i][0].titre.replace("'", "’")) {
+      if (VALEUR_CHAMP === Q[i][0].titre.replace(/'/g, "’")) {
         numQ = i;
         num++;
         melange(Q[numQ], MELANGE[numQ][0], MELANGE[numQ][1]);
@@ -314,7 +314,7 @@ function traiteReponse() {
   } else {
     if (Q[numQ][num].hasOwnProperty('choix')) {
       for (let i = 0; i < Q[numQ][num].choix.length; i++) {
-        if (VALEUR_CHAMP === Q[numQ][num].choix[i].replace("'", "’")) {
+        if (VALEUR_CHAMP === Q[numQ][num].choix[i].replace(/'/g, "’")) {
           verifieReponse();
           return;
         } else if (i === Q[numQ][num].choix.length - 1) {
