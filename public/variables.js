@@ -99,7 +99,7 @@ const Q_MOUVEMENT = [
 // num = 20
   { intit: 'Le bus 39 dans lequel je me trouve roule en ligne droite vers la station Pasteur, à la vitesse de 39 km/h. Une ambulance de l’hôpital Necker le dépasse. Sa vitesse par rapport au bus vaut 21 km/h. La vitesse à laquelle roule l’ambulance vaut (CHAMP).',
     choix: ['18 km/h', '60 km/h', '78 km/h'],
-    correct: '18 km/h' }
+    correct: '60 km/h' }
 ];
 
 // ————————————————————————————
