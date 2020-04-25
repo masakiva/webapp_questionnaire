@@ -153,7 +153,7 @@ function details() {
 }
 
 function fin() {
-  avanc++;
+  document.title = 'Résultats';
   BODY.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 60%)';
   Q_DEBUT.textContent = 'C’est terminé, restez sur cette page et attendez ' +
     'le passage du professeur.';
