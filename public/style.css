@@ -9,19 +9,22 @@ body {
                                   supported by Chrome and Opera */
 }
 
-main {
+main:not(.resultats) {
   width: 60%;
   height: auto;
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
 }
+
 p {
   margin: 0 0 10px 0;
 }
+
 .champoint {
   white-space: nowrap;
 }
+
 input {
   display: inline;
   border-radius: 5px;
@@ -29,13 +32,16 @@ input {
   padding: 7px;
   font: 17px "Courier New";
 }
+
 ul {
   font: 25px "Courier New";
   display: none;
 }
+
 li {
   margin: 10px 5%;
 }
+
 footer {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -43,6 +49,7 @@ footer {
   background: lightgrey;
   text-align: center;
 }
+
 .orange {
   width: 100%;
   padding: 0;
@@ -50,13 +57,4 @@ footer {
   border: none;
   caret-color: transparent;
   letter-spacing: 3px;
-}
-div.fleche {
-  cursor: pointer;
-  border: solid black;
-  border-width: 0 3px 3px 0;
-  display: none;
-  padding: 5px;
-  margin-left: 15px;
-  transform: rotate(45deg);
 }

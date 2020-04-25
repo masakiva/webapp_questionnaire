@@ -2,7 +2,6 @@
 
 const BODY = document.body;
 const MAIN = document.querySelector('main');
-const FLECHE = document.querySelector('.fleche');
 const QUESTION = document.querySelector('.question');
 const Q_DEBUT = document.querySelector('.q-debut');
 const CHAMP = document.querySelector('input');
@@ -19,7 +18,7 @@ let num;
 let avanc;
 let bloc;
 let points;
-let resultats = '';
+let resultats = [];
 
 // ———————————
 // REDIRECTION
@@ -29,13 +28,13 @@ function redirection() {
           num !== 5             // le numéro de la question n’est pas égal à 5
        && num !== 8             // num : numéro (fixe) de la question
        && num !== 10            // !== : ≠ (n’est pas égal à)
-       && num !== 12            // && : « et » logique
+       && num !== 12            // && : « et » logique
        && num !== 14
        && num !== 16
        && num !== 19
        && num !== 20
     || num === 8 && bloc === 2  // ici : num = 8 et bloc = 2
-    || num === 10 && bloc === 3 // || : « ou » logique
+    || num === 10 && bloc === 3 // || : « ou » logique
     || num === 19 && bloc === 7 // && est prioritaire par rapport à ||
   ) {
     num++;                      // alors num = num + 1 (sans saut)
@@ -98,6 +97,27 @@ function redirection() {
 }
 
 
+
+// convert a Unicode string to a string in which
+// each 16-bit unit occupies only one byte
+function toBinary(string) {
+  const codeUnits = new Uint16Array(string.length);
+  for (let i = 0; i < codeUnits.length; i++) {
+    codeUnits[i] = string.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint8Array(codeUnits.buffer));
+}
+
+function fromBinary(binary) {
+  const bytes = new Uint8Array(binary.length);
+  for (let i = 0; i < bytes.length; i++) {
+    bytes[i] = binary.charCodeAt(i);
+  }
+  return String.fromCharCode(...new Uint16Array(bytes.buffer));
+}
+
+
+
 function initialisation() {
   num = 0;
   avanc = 0;
@@ -105,7 +125,7 @@ function initialisation() {
   CHAMP.value = '';
   CHAMP.focus();
   Q_DEBUT.textContent = 'Ceci est un questionnaire sur ';
-  Q_FIN.textContent = '. (dev)';
+  Q_FIN.textContent = '.';
   QUESTION.style.fontSize = '35px';
   QUESTION.style.fontWeight = '600';
   CHAMP.style.fontSize = '32px';
@@ -124,6 +144,7 @@ function initialisation() {
 initialisation();
 
 function afficheResultats() {
+  BODY.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 90%)';
   Q_DEBUT.textContent = 'Note obtenue : ';
   Q_FIN.style.display = 'inline';
   Q_FIN.style.fontSize = '42px';
@@ -137,36 +158,40 @@ function afficheResultats() {
   Q_FIN.appendChild(FRASL);
   Q_FIN.appendChild(SUB);
   MAIN.removeChild(MAIN.lastChild);
-  MAIN.style.width = 'auto';
+  MAIN.setAttribute('class', 'resultats');
   QUESTION.style.textAlign = 'center';
-  FLECHE.style.display = 'inline-block';
-  QUESTION.style.display = 'inline-block';
-}
-
-function details() {
   QUESTION.style.display = 'block';
-  FLECHE.style.display = 'none';
-  const DETAILS = document.createElement('p');
-  MAIN.appendChild(DETAILS);
-  DETAILS.style.whiteSpace = 'pre-line';
-  DETAILS.textContent = resultats;
+  LISTE.style.whiteSpace = 'pre-line';
+  LISTE.style.font = '20px/2 Palatino, serif';
+  LISTE.style.listStyle = 'none';
+  LISTE.style.textIndent = '-35px';
+  for (let i = 0; i < avanc; i++) {
+    const ELEM = document.createElement('li');
+    ELEM.innerHTML = resultats[i];
+    LISTE.appendChild(ELEM);
+  }
 }
 
 function fin() {
-  avanc++;
+  document.title = 'Résultats';
   BODY.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 60%)';
-  Q_DEBUT.textContent = 'Clique sur la bande et saisis le mot de passe « translatio »';
+  Q_DEBUT.textContent = 'Clique sur la bande et saisis le mot de passe ' +
+    '« ' + MDP[numQ] + ' »';
+  while (LISTE.firstChild) {
+    LISTE.removeChild(LISTE.firstChild);
+  }
   CHAMP.style.display = 'none';
   Q_FIN.style.display = 'none';
   QUESTION.style.fontSize = '35px';
-  LISTE.style.display = 'none';
   CONSIGNE.style.display = 'none';
   const CHAMP_MDP = document.createElement('input');
   MAIN.appendChild(CHAMP_MDP).type = 'password';
   CHAMP_MDP.setAttribute('class', 'orange');
   CHAMP_MDP.style.backgroundColor = 'hsl(' + COULEUR[numQ] + ', 70%, 50%)';
   CHAMP_MDP.onkeydown = function(e) {
-    if (e.keyCode === 13 && CHAMP_MDP.value === MDP[numQ]) { afficheResultats(); }
+    if (e.keyCode === 13 && CHAMP_MDP.value === MDP[numQ]) {
+      afficheResultats();
+    }
   };
 }
 
@@ -186,6 +211,9 @@ function suivant() {
     LISTE.style.display = 'block';
     CONSIGNE_DEBUT.textContent = 'Recopie la bonne réponse dans le champ ' +
       'sans te tromper et valide-la par la touche ';
+    for (let i = 1; i < Q[numQ].length; i++) {
+      Q[numQ][i].correct = fromBinary(atob(Q[numQ][i].correct));
+    }
   }
   if (num >= Q[numQ].length) {
     return;
@@ -199,10 +227,10 @@ function suivant() {
   CHAMP.style.backgroundColor = 'white';
   const Q_INTIT = Q[numQ][num].intit.split('(CHAMP)');
   Q_DEBUT.textContent =
-    Q_INTIT[0].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
+    Q_INTIT[0].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
   Q_FIN.textContent =
-    Q_INTIT[1].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
-  if (Q_FIN.textContent === "." || Q_FIN.textContent === " ».") {
+    Q_INTIT[1].replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »');
+  if (Q_FIN.textContent === "." || Q_FIN.textContent === " ».") {
     CHAMPOINT.style.whiteSpace = 'nowrap';
   } else {
     CHAMPOINT.style.whiteSpace = 'unset';
@@ -239,6 +267,18 @@ function suivant() {
   }
 }
 
+function remplitResultats(reponse) {
+  if (reponse === 'correct') {
+    resultats[avanc - 1] = avanc + '. <span style="color: green">« ' +
+      CHAMP.value + ' »</span> : ' + 'réponse juste<br>';
+  } else {
+    resultats[avanc - 1] = avanc + '. <em>' +
+      Q[numQ][num].intit.replace('(CHAMP)', '[…]').replace(/'/g, "’").replace(/<&/g, '« ').replace(/&>/g, ' »') +
+      '</em> <span style="color: crimson">« ' + CHAMP.value + ' »</span> : ' +
+      'réponse fausse<br>';
+  }
+}
+
 function verifieReponse() {
   if (CHAMP.value.replace(/'/g, "’").trim()
       === Q[numQ][num].correct.replace(/'/g, "’")) {
@@ -251,48 +291,40 @@ function verifieReponse() {
         console.log('réponse [' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
           '] correcte : ' + points + ' points');
       }
-      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] + '] « ' + CHAMP.value +
-		' » ' + 'réponse correcte' + '\r\n';
+      remplitResultats('correct');
     } else {
       if (points === 1) {
         console.log('réponse [' + num + '] correcte : ' + points + ' point');
       } else {
         console.log('réponse [' + num + '] correcte : ' + points + ' points');
       }
-      resultats += '[' + num + '] « ' + CHAMP.value + ' » ' + 'réponse correcte' + '\r\n';
-	}
+      remplitResultats('correct');
+    }
   } else {
     if (Q[numQ][num].hasOwnProperty('choix')) {
       if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
       console.log('réponse [' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
-        '] : « ' + CHAMP.value + ' » (question : ' +
+        '] : « ' + CHAMP.value + ' » (question : ' +
         Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
-      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] + '] « ' +
-        CHAMP.value + ' » ' + 'réponse incorrecte' + ' (' +
-		Q[numQ][num].intit.replace('(CHAMP)', '[…]') +
-        ')\r\n';
+      remplitResultats('incorrect');
       } else {
-      console.log('réponse [' + num + '] : « ' + CHAMP.value + ' »')
-      resultats += '[' + num + '] « ' + CHAMP.value + ' » ' + 'réponse incorrecte' + ' (' +
-		Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+      console.log('réponse [' + num + '] : « ' + CHAMP.value + ' »')
+      remplitResultats('incorrect');
       }
     } else {
       if (num >= MELANGE[numQ][0] && num <= MELANGE[numQ][1]) {
       console.log('réponse libre [' + MELANGE[numQ][0] + ' – ' +
-        MELANGE[numQ][1] + '] : « ' + CHAMP.value + ' » (question : ' +
+        MELANGE[numQ][1] + '] : « ' + CHAMP.value + ' » (question : ' +
         Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')');
-      resultats += '[' + MELANGE[numQ][0] + ' – ' + MELANGE[numQ][1] +
-        '] « ' + CHAMP.value + ' » ' + 'réponse incorrecte' + ' (' +
-        Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+      remplitResultats('incorrect');
       } else {
-      console.log('réponse libre [' + num + '] : « ' + CHAMP.value + ' »')
-      resultats += '[' + num + '] « ' + CHAMP.value + ' » ' + 'réponse incorrecte' + ' (' +
-		Q[numQ][num].intit.replace('(CHAMP)', '[…]') + ')\r\n';
+      console.log('réponse libre [' + num + '] : « ' + CHAMP.value + ' »')
+      remplitResultats('incorrect');
       }
     }
   }
   redirection();
-  suivant();
+  suivant()
 }
 
 function reponseInvalide() {
