@@ -7,7 +7,9 @@
 </div>
 
 I wrote this webapp when I was learning JavaScript.  
-It was for my dad's technology classes in French junior high school.  
+It was used as an evaluation for my dad's technology classes for French junior high school students.  
+You are guided throughout the test, according to an algorithm I designed with my father. The questions increases in difficulty depending on the previous answers.
+
 It is live at https://cardamine.frama.io/sagine/.
 
 If you want to try, you can write `le mouvement` or `l’énergie` on the first page, then choose an answer to each question.
